@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panira 💖</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef5, #ffc2d9);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.6);
+      font-size: 30px;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-120px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      width: 420px;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(18px);
+      border-radius: 35px;
+      padding: 35px;
+      box-shadow: 0 10px 40px rgba(255, 105, 180, 0.25);
+      border: 1px solid rgba(255,255,255,0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: #ff4f8b;
+    }
+
+    .logo p {
+      color: #7b4b63;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .task-input {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .task-input input {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      border-radius: 18px;
+      outline: none;
+      background: rgba(255,255,255,0.7);
+      font-size: 15px;
+      color: #5f3146;
+    }
+
+    .task-input input::placeholder {
+      color: #b06c88;
+    }
+
+    .task-input button {
+      padding: 16px 22px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ff4f8b, #ff8fab);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(255, 79, 139, 0.3);
+    }
+
+    .task-input button:hover {
+      transform: scale(1.05);
+    }
+
+    .task-list {
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .task {
+      background: rgba(255,255,255,0.65);
+      padding: 16px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      animation: fadeIn 0.4s ease;
+      box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .task-left input {
+      width: 20px;
+      height: 20px;
+      accent-color: #ff4f8b;
+      cursor: pointer;
+    }
+
+    .task-text {
+      color: #5f3146;
+      font-weight: 500;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    .delete-btn {
+      border: none;
+      background: #ff7aa2;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .delete-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .stats {
+      margin-top: 20px;
+      text-align: center;
+      color: #7b4b63;
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .task-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .task-list::-webkit-scrollbar-thumb {
+      background: #ff8fab;
+      border-radius: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="heart" style="left:10%; animation-delay:0s;">💖</div>
+  <div class="heart" style="left:30%; animation-delay:2s;">💕</div>
+  <div class="heart" style="left:50%; animation-delay:4s;">💗</div>
+  <div class="heart" style="left:70%; animation-delay:1s;">💞</div>
+  <div class="heart" style="left:90%; animation-delay:3s;">💓</div>
+
+  <div class="container">
+
+    <div class="logo">
+      <h1>Panira 💖</h1>
+      <p>Your lovable daily task companion</p>
+    </div>
+
+    <div class="task-input">
+      <input type="text" id="taskInput" placeholder="Write your lovely task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+
+    <div class="task-list" id="taskList"></div>
+
+    <div class="stats" id="stats">
+      0 Tasks Completed ✨
+    </div>
+
+  </div>
+
+  <script>
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+    const stats = document.getElementById('stats');
+
+    let completedTasks = 0;
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+
+      if(taskText === '') {
+        alert('Please enter a task 💖');
+        return;
+      }
+
+      const task = document.createElement('div');
+      task.classList.add('task');
+
+      task.innerHTML = `
+        <div class="task-left">
+          <input type="checkbox">
+          <span class="task-text">${taskText}</span>
+        </div>
+
+        <button class="delete-btn">Delete</button>
+      `;
+
+      const checkbox = task.querySelector('input');
+      const taskTextElement = task.querySelector('.task-text');
+      const deleteBtn = task.querySelector('.delete-btn');
+
+      checkbox.addEventListener('change', () => {
+        taskTextElement.classList.toggle('completed');
+
+        if(checkbox.checked) {
+          completedTasks++;
+        } else {
+          completedTasks--;
+        }
+
+        updateStats();
+      });
+
+      deleteBtn.addEventListener('click', () => {
+        if(checkbox.checked) {
+          completedTasks--;
+        }
+
+        task.remove();
+        updateStats();
+      });
+
+      taskList.appendChild(task);
+      taskInput.value = '';
+
+      updateStats();
+    }
+
+    function updateStats() {
+      stats.innerText = `${completedTasks} Tasks Completed ✨`;
+    }
+
+    taskInput.addEventListener('keypress', function(e) {
+      if(e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+
+</body>
+</html>
+```
+
