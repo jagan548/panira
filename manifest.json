@@ -1,0 +1,16 @@
+{
+  "name": "Panira",
+  "short_name": "Panira",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffd6e8",
+  "theme_color": "#ff4f8b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
